@@ -1,0 +1,6 @@
+framework module Pods_Reserved {
+  umbrella header "Pods-Reserved-umbrella.h"
+
+  export *
+  module * { export * }
+}
