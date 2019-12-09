@@ -402,6 +402,7 @@
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DAv-8S-Tyc">
                                 <rect key="frame" x="138.5" y="204" width="98.5" height="21"/>
+                                <accessibility key="accessibilityConfiguration" label="NameLabel"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -445,6 +446,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="NameLabel" destination="DAv-8S-Tyc" id="RaI-xM-OeU"/>
                         <outlet property="profileSettings" destination="sa8-ZY-zBU" id="AOZ-Ut-zsf"/>
                         <outlet property="reservations" destination="gwm-VB-KQ0" id="Yf4-cs-l9O"/>
                     </connections>
@@ -646,11 +648,11 @@
             <objects>
                 <viewController id="Jmf-nN-7gm" customClass="ReservationsViewController" customModule="Reserved" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xLk-UZ-rur">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="402"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="379"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fFT-ad-bAA">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="402"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="379"/>
                                 <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableView>
                         </subviews>
@@ -673,26 +675,28 @@
             <objects>
                 <viewController id="jtK-ha-ZAs" customClass="ProfileSettingsViewController" customModule="Reserved" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="w7b-QV-0qZ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="402"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="379"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3k8-4F-vjK">
                                 <rect key="frame" x="50" y="15" width="275" height="50"/>
                                 <color key="backgroundColor" red="0.83914166690000003" green="0.83926302190000002" blue="0.83911520240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <accessibility key="accessibilityConfiguration" label="Name"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="aRc-N8-bWN"/>
                                 </constraints>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" red="0.17517978996794836" green="0.17517978996794836" blue="0.17517978996794836" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dns-Z5-dW5">
                                 <rect key="frame" x="50" y="90" width="275" height="50"/>
                                 <color key="backgroundColor" red="0.83914166690000003" green="0.83926302190000002" blue="0.83911520240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <accessibility key="accessibilityConfiguration" label="Mail"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="TNJ-aU-lX9"/>
                                 </constraints>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" white="0.10000000000000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -702,7 +706,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="HBU-nR-kkh"/>
                                 </constraints>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" white="0.10000000000000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -712,12 +716,12 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="kjA-RU-Kvj"/>
                                 </constraints>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" white="0.10000000000000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NK6-Ag-0yx">
-                                <rect key="frame" x="50" y="327" width="275" height="50"/>
+                                <rect key="frame" x="50" y="304" width="275" height="50"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="YCI-Ei-xbg"/>
@@ -729,13 +733,14 @@
                                     <action selector="SaveChanges:" destination="w9l-i0-ydU" eventType="touchUpInside" id="TyJ-gw-iB5"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="PhonePlaceholder" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BI6-gP-bv3">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BI6-gP-bv3">
                                 <rect key="frame" x="50" y="315" width="275" height="50"/>
                                 <color key="backgroundColor" red="0.83914166690000003" green="0.83926302190000002" blue="0.83911520240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <accessibility key="accessibilityConfiguration" label="Phone"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="C1P-EJ-w7B"/>
                                 </constraints>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" white="0.10000000000000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -765,6 +770,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tij-cC-Bj5"/>
                     </view>
+                    <connections>
+                        <outlet property="Mail" destination="dns-Z5-dW5" id="iyk-BO-iTF"/>
+                        <outlet property="Name" destination="3k8-4F-vjK" id="Voe-Ct-pwN"/>
+                        <outlet property="Phone" destination="BI6-gP-bv3" id="plI-ia-CzV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1LI-qF-Nel" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="w9l-i0-ydU" userLabel="Exit" sceneMemberID="exit"/>

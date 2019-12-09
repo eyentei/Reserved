@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ProfileViewController: UIViewController {
+    @IBOutlet weak var NameLabel: UILabel!
     
     @IBAction func LogOut(_ sender: Any) {
         self.navigationController?.popToRootViewController(animated: true)
@@ -33,6 +35,9 @@ class ProfileViewController: UIViewController {
         
         profileSettings.isHidden = false
         reservations.isHidden = true
+        let realm = try! Realm()
+              var users = realm.objects(User.self)
+        NameLabel.text=users[0].name
         // Do any additional setup after loading the view.
     }
     
