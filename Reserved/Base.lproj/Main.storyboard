@@ -1066,6 +1066,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lkO-ys-ha3">
                                         <rect key="frame" x="35" y="131" width="305" height="38"/>
                                         <color key="backgroundColor" red="0.83914166690000003" green="0.83926302190000002" blue="0.83911520240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <accessibility key="accessibilityConfiguration" label="Password"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="38" id="HBU-nR-kkh"/>
                                         </constraints>
@@ -1076,6 +1077,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Repeat Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a9E-0C-UVd">
                                         <rect key="frame" x="35" y="189" width="305" height="38"/>
                                         <color key="backgroundColor" red="0.83914166690000003" green="0.83926302190000002" blue="0.83911520240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <accessibility key="accessibilityConfiguration" label="RepeatPassword"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="38" id="kjA-RU-Kvj"/>
                                         </constraints>
@@ -1093,6 +1095,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
+                                            <action selector="SaveChanges:" destination="jtK-ha-ZAs" eventType="touchUpInside" id="2ln-Fz-Qrn"/>
                                             <action selector="SaveChanges:" destination="w9l-i0-ydU" eventType="touchUpInside" id="TyJ-gw-iB5"/>
                                         </connections>
                                     </button>
@@ -1146,7 +1149,9 @@
                     <connections>
                         <outlet property="Mail" destination="dns-Z5-dW5" id="iyk-BO-iTF"/>
                         <outlet property="Name" destination="3k8-4F-vjK" id="Voe-Ct-pwN"/>
+                        <outlet property="Password" destination="lkO-ys-ha3" id="YHz-dY-lve"/>
                         <outlet property="Phone" destination="BI6-gP-bv3" id="plI-ia-CzV"/>
+                        <outlet property="RepeatPassword" destination="a9E-0C-UVd" id="b1M-wH-9cf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1LI-qF-Nel" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
