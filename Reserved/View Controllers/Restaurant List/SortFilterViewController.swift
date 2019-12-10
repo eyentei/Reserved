@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SortFilterViewController: UIViewController {
+class SortFilterViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
