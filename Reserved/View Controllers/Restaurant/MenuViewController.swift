@@ -10,9 +10,12 @@ import UIKit
 
 class MenuViewController: UIViewController {
 
+    var img:UIImage?
+    
+    @IBOutlet weak var menuOffer: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        menuOffer.image = img
         // Do any additional setup after loading the view.
     }
     

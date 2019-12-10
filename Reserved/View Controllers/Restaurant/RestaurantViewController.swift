@@ -20,9 +20,25 @@ class RestaurantViewController: UIViewController {
     @IBOutlet weak var restAddress: UILabel!
     @IBOutlet weak var restPhone: UILabel!
     @IBOutlet weak var restWebsite: UILabel!
+    var whatShow: Int!
     
-   
-
+    @IBAction func showMenusOffers(_ sender: UIButton) {
+        whatShow = sender.tag
+        performSegue(withIdentifier: "toMenusOffers", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "toMenusOffers" {
+        let vc = segue.destination as! MenuViewController
+        if whatShow == 1 {
+            vc.img = UIImage(named: "menu1")
+        } else if whatShow == 2 {
+            vc.img = UIImage(named: "promo1")
+        }
+        
+        }
+        
+    }
    
     override func viewDidLoad() {
         super.viewDidLoad()

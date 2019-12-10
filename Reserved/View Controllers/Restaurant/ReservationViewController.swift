@@ -15,8 +15,14 @@ class ReservationViewController: UIViewController, ModalDelegate {
     
     
     
+    
     @IBOutlet var buttons: [UIButton]!
     @IBOutlet weak var date: UILabel!
+    
+    @IBAction func selectTable(_ sender: UIButton) {
+        navigationController?.popViewController(animated: true)
+    }
+    
     @IBAction func showDatePicker(_ sender: UIButton) {
         let vc = self.storyboard!.instantiateViewController(withIdentifier: "datepickerVC") as! DatePickerViewController
        vc.modalPresentationStyle = .overCurrentContext
