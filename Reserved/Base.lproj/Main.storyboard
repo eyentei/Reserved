@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dKw-ni-KoH">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -270,7 +270,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <state key="normal" title="Book"/>
                                 <connections>
-                                    <segue destination="uxb-a7-NEX" kind="show" id="YK7-w1-nnZ"/>
+                                    <action selector="Book:" destination="dce-RE-0vw" eventType="touchUpInside" id="OlY-rz-OVj"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AZ6-gb-rpY">
@@ -289,6 +289,7 @@
                         <outlet property="restPhone" destination="Itq-7F-SKp" id="MEc-Ma-fPA"/>
                         <outlet property="restWebsite" destination="fY1-pB-BR6" id="yzh-dO-VZz"/>
                         <segue destination="Tnc-eu-GE8" kind="show" identifier="toMenusOffers" id="j0v-fn-VWN"/>
+                        <segue destination="uxb-a7-NEX" kind="show" identifier="toReservation" id="yJa-4P-0ve"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qgP-Lm-o1e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
