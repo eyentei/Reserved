@@ -15,6 +15,7 @@ class Reservation: Object {
     @objc dynamic var restaurant: Restaurant?
     @objc dynamic var time = Date()
     @objc dynamic var person: User?
+    var tables = List<Int>()
     
     override static func primaryKey() -> String? {
         return "id"

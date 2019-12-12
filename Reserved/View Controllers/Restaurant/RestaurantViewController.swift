@@ -12,7 +12,7 @@ import CoreLocation
 import Contacts
 
 class RestaurantViewController: UIViewController {
-
+    
     var restaurant:Restaurant!
     
     @IBOutlet weak var restImage: UIImageView!
@@ -27,6 +27,10 @@ class RestaurantViewController: UIViewController {
         performSegue(withIdentifier: "toMenusOffers", sender: nil)
     }
     
+    @IBAction func Book(_ sender: Any) {
+        performSegue(withIdentifier: "toReservation", sender: nil)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "toMenusOffers" {
         let vc = segue.destination as! MenuViewController
@@ -36,6 +40,9 @@ class RestaurantViewController: UIViewController {
             vc.img = UIImage(named: "promo1")
         }
         
+    } else if segue.identifier == "toReservation" {
+        let vc = segue.destination as! ReservationViewController
+        vc.currentRestaurant = restaurant
         }
         
     }

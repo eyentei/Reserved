@@ -90,6 +90,8 @@ class MainViewController: UIViewController {
             hailey.number = "+1(999)123-12-23"
             hailey.pic = "user"
             realm.add(hailey)
+            
+        UserDefaults.standard.set(hailey.id, forKey: "UserId")
         }
             }
             
