@@ -64,7 +64,7 @@
             <objects>
                 <viewController id="OiK-ba-U9J" customClass="SignUpViewController" customModule="Reserved" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TdX-TP-mzf">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8o2-zI-lmk">
@@ -146,7 +146,7 @@
             <objects>
                 <viewController id="2JS-fj-LJI" customClass="RestaurantsListViewController" customModule="Reserved" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="73L-9h-HLt">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ZXw-8a-kr7">
@@ -218,67 +218,95 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="552"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Address" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vlZ-jT-d67">
-                                <rect key="frame" x="23" y="378" width="330" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Address" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vlZ-jT-d67">
+                                <rect key="frame" x="68" y="348" width="240" height="18"/>
+                                <fontDescription key="fontDescription" name="Didot-Italic" family="Didot" pointSize="18"/>
                                 <color key="textColor" red="0.50593370199999999" green="0.51377803089999996" blue="0.50980407000000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Phone" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Itq-7F-SKp">
-                                <rect key="frame" x="23" y="418" width="330" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Phone" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Itq-7F-SKp">
+                                <rect key="frame" x="68" y="381" width="240" height="18"/>
+                                <fontDescription key="fontDescription" name="Didot-Italic" family="Didot" pointSize="18"/>
                                 <color key="textColor" red="0.52951627970000004" green="0.54122650620000001" blue="0.5372552276" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Restaurant Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wr9-G5-suU">
-                                <rect key="frame" x="35" y="91" width="307" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <nil key="textColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Restaurant Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wr9-G5-suU">
+                                <rect key="frame" x="68" y="304" width="240" height="29"/>
+                                <fontDescription key="fontDescription" name="Didot-Bold" family="Didot" pointSize="24"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9fS-KU-Th2">
-                                <rect key="frame" x="38" y="533" width="52" height="38"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="249" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9fS-KU-Th2">
+                                <rect key="frame" x="42" y="456" width="140" height="38"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <state key="normal" title="Menu"/>
+                                <state key="normal" title="MENU">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="showMenusOffers:" destination="dce-RE-0vw" eventType="touchUpInside" id="fCJ-jy-kyM"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ccZ-6d-rl0">
-                                <rect key="frame" x="290" y="533" width="57" height="38"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <state key="normal" title="Offers"/>
-                                <connections>
-                                    <action selector="showMenusOffers:" destination="dce-RE-0vw" eventType="touchUpInside" id="Phh-Fd-jiD"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Website" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fY1-pB-BR6">
-                                <rect key="frame" x="23" y="459" width="330" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Website" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fY1-pB-BR6">
+                                <rect key="frame" x="68" y="414" width="240" height="18"/>
+                                <fontDescription key="fontDescription" name="Didot-Italic" family="Didot" pointSize="18"/>
                                 <color key="textColor" red="0.52951627970000004" green="0.54122650620000001" blue="0.5372552276" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="45i-4h-LBG">
-                                <rect key="frame" x="164" y="533" width="47" height="38"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="45i-4h-LBG">
+                                <rect key="frame" x="42" y="506" width="291" height="38"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <state key="normal" title="Book"/>
+                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="BOOK">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="Book:" destination="dce-RE-0vw" eventType="touchUpInside" id="OlY-rz-OVj"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AZ6-gb-rpY">
-                                <rect key="frame" x="35" y="142" width="307" height="220"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AZ6-gb-rpY">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="289"/>
                             </imageView>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ccZ-6d-rl0">
+                                <rect key="frame" x="193" y="456" width="140" height="38"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="21"/>
+                                <state key="normal" title="OFFERS">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="showMenusOffers:" destination="dce-RE-0vw" eventType="touchUpInside" id="Phh-Fd-jiD"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Itq-7F-SKp" firstAttribute="top" secondItem="vlZ-jT-d67" secondAttribute="bottom" constant="15" id="1GK-ly-1E9"/>
+                            <constraint firstItem="45i-4h-LBG" firstAttribute="leading" secondItem="9fS-KU-Th2" secondAttribute="leading" id="1aI-7C-7Vg"/>
+                            <constraint firstItem="Itq-7F-SKp" firstAttribute="centerX" secondItem="GVx-fW-uD6" secondAttribute="centerX" id="3YZ-Rr-vT6"/>
+                            <constraint firstItem="45i-4h-LBG" firstAttribute="top" secondItem="ccZ-6d-rl0" secondAttribute="bottom" constant="10" id="4iW-pk-chO"/>
+                            <constraint firstItem="wr9-G5-suU" firstAttribute="top" secondItem="AZ6-gb-rpY" secondAttribute="bottom" constant="15" id="EhU-I2-o4T"/>
+                            <constraint firstItem="4hB-1o-LTa" firstAttribute="bottom" secondItem="AZ6-gb-rpY" secondAttribute="bottom" constant="287" id="KIV-eD-xjY"/>
+                            <constraint firstItem="45i-4h-LBG" firstAttribute="top" secondItem="9fS-KU-Th2" secondAttribute="bottom" constant="10" id="KM6-f4-ic2"/>
+                            <constraint firstItem="fY1-pB-BR6" firstAttribute="top" secondItem="Itq-7F-SKp" secondAttribute="bottom" constant="15" id="Ny0-mI-pkZ"/>
+                            <constraint firstItem="vlZ-jT-d67" firstAttribute="centerX" secondItem="GVx-fW-uD6" secondAttribute="centerX" id="OeH-BT-yfd"/>
+                            <constraint firstItem="AZ6-gb-rpY" firstAttribute="top" secondItem="4hB-1o-LTa" secondAttribute="top" constant="4" id="QvO-7M-ZOj"/>
+                            <constraint firstItem="9fS-KU-Th2" firstAttribute="leading" secondItem="4hB-1o-LTa" secondAttribute="leading" constant="42" id="S9w-OD-4k7"/>
+                            <constraint firstItem="45i-4h-LBG" firstAttribute="leading" secondItem="4hB-1o-LTa" secondAttribute="leading" constant="42" id="XIe-Oi-qdo"/>
+                            <constraint firstItem="vlZ-jT-d67" firstAttribute="top" secondItem="wr9-G5-suU" secondAttribute="bottom" constant="15" id="Xvh-JY-Ono"/>
+                            <constraint firstItem="AZ6-gb-rpY" firstAttribute="centerX" secondItem="wr9-G5-suU" secondAttribute="centerX" id="ZsB-A2-ZsG"/>
+                            <constraint firstItem="ccZ-6d-rl0" firstAttribute="top" secondItem="fY1-pB-BR6" secondAttribute="bottom" constant="24" id="dbt-Dx-b4H"/>
+                            <constraint firstItem="9fS-KU-Th2" firstAttribute="top" secondItem="fY1-pB-BR6" secondAttribute="bottom" constant="24" id="dw8-Rv-515"/>
+                            <constraint firstItem="AZ6-gb-rpY" firstAttribute="leading" secondItem="4hB-1o-LTa" secondAttribute="leading" id="f2o-n8-OmL"/>
+                            <constraint firstItem="45i-4h-LBG" firstAttribute="trailing" secondItem="ccZ-6d-rl0" secondAttribute="trailing" id="fcW-a6-PRa"/>
+                            <constraint firstItem="wr9-G5-suU" firstAttribute="centerX" secondItem="GVx-fW-uD6" secondAttribute="centerX" id="gkJ-P0-gOe"/>
+                            <constraint firstItem="ccZ-6d-rl0" firstAttribute="leading" secondItem="4hB-1o-LTa" secondAttribute="leading" constant="193" id="h3L-V8-HWe"/>
+                            <constraint firstItem="ccZ-6d-rl0" firstAttribute="leading" secondItem="9fS-KU-Th2" secondAttribute="trailing" constant="10" id="iCv-pP-enm"/>
+                            <constraint firstItem="fY1-pB-BR6" firstAttribute="centerX" secondItem="GVx-fW-uD6" secondAttribute="centerX" id="qky-BJ-dx3"/>
+                            <constraint firstItem="45i-4h-LBG" firstAttribute="centerX" secondItem="GVx-fW-uD6" secondAttribute="centerX" id="rLj-dI-Gjt"/>
+                            <constraint firstItem="4hB-1o-LTa" firstAttribute="trailing" secondItem="ccZ-6d-rl0" secondAttribute="trailing" constant="42" id="try-3a-PhO"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="4hB-1o-LTa"/>
                     </view>
                     <navigationItem key="navigationItem" id="8vV-iy-2oS"/>
@@ -546,7 +574,7 @@
             <objects>
                 <viewController id="cse-vR-hSw" customClass="ProfileViewController" customModule="Reserved" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="h3C-G9-8Q4">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gwm-VB-KQ0">
@@ -628,7 +656,7 @@
             <objects>
                 <viewController id="0an-N8-dch" customClass="SignInViewController" customModule="Reserved" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZXN-5D-1aK">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sign In" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FZB-lF-GRx">
@@ -857,7 +885,7 @@
             <objects>
                 <tableViewController id="vl0-uc-Cso" customClass="SortFilterViewController" customModule="Reserved" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="DaC-hf-Smk">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <sections>
@@ -1181,9 +1209,9 @@
         <image name="user" width="133" height="135"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="5Jq-51-xNP"/>
+        <segue reference="4Y5-Ra-p20"/>
         <segue reference="CaE-ek-Ixr"/>
         <segue reference="FXm-XG-vOV"/>
-        <segue reference="8ZY-8I-kjQ"/>
+        <segue reference="Ajj-Xq-KPw"/>
     </inferredMetricsTieBreakers>
 </document>
