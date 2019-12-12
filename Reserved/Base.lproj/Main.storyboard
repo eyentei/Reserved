@@ -557,7 +557,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sa8-ZY-zBU">
                                 <rect key="frame" x="0.0" y="288" width="375" height="379"/>
                                 <connections>
-                                    <segue destination="jtK-ha-ZAs" kind="embed" id="pGH-eV-UT5"/>
+                                    <segue destination="jtK-ha-ZAs" kind="embed" identifier="ProfSettings" id="pGH-eV-UT5"/>
                                 </connections>
                             </containerView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user" translatesAutoresizingMaskIntoConstraints="NO" id="Zfo-7c-RG8">

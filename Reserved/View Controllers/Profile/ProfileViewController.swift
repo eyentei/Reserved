@@ -9,8 +9,16 @@
 import UIKit
 import RealmSwift
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController,UpdateLabelTextDelegate {
+    
     @IBOutlet weak var NameLabel: UILabel!
+
+    func updateLabelText(withText text: String) {
+      NameLabel.text = text
+    }
+    
+    
+
     
     @IBAction func LogOut(_ sender: Any) {
         self.navigationController?.popToRootViewController(animated: true)
@@ -19,6 +27,9 @@ class ProfileViewController: UIViewController {
    
     @IBOutlet weak var profileSettings: UIView!
     @IBOutlet weak var reservations: UIView!
+    
+    
+    
     @IBAction func SwitchProfile(_ sender: AnyObject) {
         switch sender.selectedSegmentIndex {
         case 0 :
@@ -30,6 +41,15 @@ class ProfileViewController: UIViewController {
         default: break;
     }
     }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            if let vc = segue.destination as? ProfileSettingsViewController,
+                segue.identifier == "ProfSettings" {
+                vc.delegate = self
+            }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,6 +58,9 @@ class ProfileViewController: UIViewController {
         let realm = try! Realm()
               var users = realm.objects(User.self)
         NameLabel.text=users[0].name
+      
+               
+    
         // Do any additional setup after loading the view.
     }
     
