@@ -51,7 +51,7 @@ class RestaurantViewController: UIViewController {
         super.viewDidLoad()
         
         let address = CLGeocoder.init()
-        address.reverseGeocodeLocation(CLLocation.init(latitude: restaurant.latitude, longitude:restaurant.longitude)) { (places, error) in
+        address.reverseGeocodeLocation(CLLocation.init(latitude: restaurant.lat, longitude:restaurant.lng)) { (places, error) in
                    if error == nil{
                        if let place = places{
                        

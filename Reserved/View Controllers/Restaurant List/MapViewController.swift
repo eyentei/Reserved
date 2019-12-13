@@ -39,7 +39,7 @@ class MapViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDel
         
         for rest in restaurants {
             let annotation = Annotation()
-            annotation.coordinate = CLLocationCoordinate2D(latitude: rest.latitude, longitude: rest.longitude)
+            annotation.coordinate = CLLocationCoordinate2D(latitude: rest.lat, longitude: rest.lng)
             annotation.title = rest.name
             annotation.restaurant = rest
             map.addAnnotation(annotation)

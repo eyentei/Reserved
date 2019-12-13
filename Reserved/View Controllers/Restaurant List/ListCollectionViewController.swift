@@ -8,13 +8,17 @@
 
 import UIKit
 import RealmSwift
+import CoreLocation
+import GeoQueries
+import MapKit
 
 
 private let reuseIdentifier = "RestaurantCell"
 
-class ListCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-
-    var restaurants: Results<Restaurant>!
+class ListCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate {
+    
+    var sortBy: String = "Name"
+    var restaurants: Array<Restaurant>!
     var restaurant: Restaurant!
     var realm: Realm!
     
@@ -24,25 +28,48 @@ class ListCollectionViewController: UICollectionViewController, UICollectionView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         realm = try! Realm()
-        restaurants = realm.objects(Restaurant.self)
-    //self.collectionView.register(ListCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        restaurants = Array(realm.objects(Restaurant.self).sorted(byKeyPath: "lowercaseName"))
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+       
+        switch sortBy {
+        case "Name":
+            restaurants = Array(realm.objects(Restaurant.self).sorted(byKeyPath: "lowercaseName"))
+            break
+        case "Price":
+            restaurants = Array(realm.objects(Restaurant.self).sorted(byKeyPath: "price"))
+            break
+        case "Distance":
+            let locationManager = CLLocationManager()
+            locationManager.requestWhenInUseAuthorization()
 
-    override func viewWillAppear(_ animated: Bool) {
+            if CLLocationManager.locationServicesEnabled() {
+                locationManager.delegate = self
+                locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+                locationManager.startUpdatingLocation()
+            }
+            
+            let coords: CLLocationCoordinate2D = locationManager.location!.coordinate
+           
+            restaurants = try! realm.findNearby(type: Restaurant.self, origin: coords, radius: 50000, sortAscending: true)
+            
+            break
+        default:
+            break
+        }
+        
+
         self.collectionView.reloadData()
 
     }
-
+    
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-
         return 1
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-
         return restaurants!.count
     }
 

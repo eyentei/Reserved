@@ -60,7 +60,6 @@ class DatePickerViewController: UIViewController {
     
     @IBAction func ok(_ sender: Any) {
         
-        
         if let delegate = self.delegate {
             delegate.changeValue(value: datePicker!.date)
         }

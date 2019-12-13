@@ -63,7 +63,7 @@ class ReservationViewController: UIViewController, ModalDelegate {
         let vc = self.storyboard!.instantiateViewController(withIdentifier: "datepickerVC") as! DatePickerViewController
        vc.modalPresentationStyle = .overCurrentContext
        vc.modalTransitionStyle = .crossDissolve
-       vc.delegate=self
+       vc.delegate = self
        present(vc, animated: true, completion: nil)
         
        }
