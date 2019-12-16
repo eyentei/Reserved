@@ -31,6 +31,7 @@
 		AAFAD3C8239911E4007B1EF9 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFAD3C7239911E4007B1EF9 /* MapViewController.swift */; };
 		AAFAD3CF2399144F007B1EF9 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFAD3CE2399144F007B1EF9 /* MenuViewController.swift */; };
 		EE19BA8AE2B69180234266F0 /* Pods_Reserved.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B8545919D51CFAA5A5FA7E2 /* Pods_Reserved.framework */; };
+		F395BF5A23A7E0A100D0F9D7 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F395BF5823A7E0A100D0F9D7 /* TableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		AAFAD3C5239911A5007B1EF9 /* ReservationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationsViewController.swift; sourceTree = "<group>"; };
 		AAFAD3C7239911E4007B1EF9 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		AAFAD3CE2399144F007B1EF9 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		F395BF5823A7E0A100D0F9D7 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +167,7 @@
 				AAFAD3C02398FDE8007B1EF9 /* ProfileViewController.swift */,
 				AAFAD3C323991193007B1EF9 /* ProfileSettingsViewController.swift */,
 				AAFAD3C5239911A5007B1EF9 /* ReservationsViewController.swift */,
+				F395BF5823A7E0A100D0F9D7 /* TableViewCell.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 				AAFAD3C12398FDE8007B1EF9 /* ProfileViewController.swift in Sources */,
 				AAFAD3C423991193007B1EF9 /* ProfileSettingsViewController.swift in Sources */,
 				AA3162F8239C57550046CD9E /* ListCollectionViewController.swift in Sources */,
+				F395BF5A23A7E0A100D0F9D7 /* TableViewCell.swift in Sources */,
 				AA3162D9239C3A3D0046CD9E /* User.swift in Sources */,
 				AABF5A172396D6BD00E1D689 /* SceneDelegate.swift in Sources */,
 				AA3162DD239C3C270046CD9E /* Restaurant.swift in Sources */,

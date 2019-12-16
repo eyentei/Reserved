@@ -25,14 +25,18 @@ class ReservationsViewController: UIViewController {
         dateFormatter.dateFormat = "dd.MM.y HH:mm"
         return dateFormatter.string(from: value)
     }
-    
+    func registerTableViewCell()
+    {let textFieldCell=UINib(nibName: "TableViewCell", bundle: nil)
+        self.tableView.register(textFieldCell, forCellReuseIdentifier: "TableViewCell")
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
-        self.tableView.dataSource=self as? UITableViewDataSource
+        //self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
+        //self.registerTableViewCell()
+       // self.tableView.dataSource=self as? UITableViewDataSource
                //self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
-
-        //self.tableView.dataSource = self as! UITableViewDataSource
+         // self.tableView.reloadData()
+       self.tableView.dataSource = self as! UITableViewDataSource
        
             }
     }
@@ -42,17 +46,17 @@ class ReservationsViewController: UIViewController {
         return self.getReservations().count
     }
         
-    
-        
-
-
-
 func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-     let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)//1.
+     //let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)//1.
+    let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
+    
     var reserv=self.getReservations()
+    cell.RestLabel.text=reserv[indexPath.row].restaurant?.name
+    cell.DateLabel.text=formatDate(value: reserv[indexPath.row].time)
+    cell.TableLabel.text =  listToString(tables:reserv[indexPath.row].tables)
     //2.
     //cell.textLabel?.text =  listToString(tables:reserv[indexPath.row].tables)
-    cell.textLabel?.text =  formatDate(value: reserv[indexPath.row].time)
+    //cell.textLabel?.text =  formatDate(value: reserv[indexPath.row].time)
    // cell.textLabel?.text =  reserv[indexPath.row].restaurant?.name
    // cell.detailTextLabel?.text =  reserv[indexPath.row].restaurant?.name
      return cell
