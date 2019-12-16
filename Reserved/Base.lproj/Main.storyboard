@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dKw-ni-KoH">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -244,6 +244,11 @@
                                 <state key="normal" title="MENU">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="showMenusOffers:" destination="dce-RE-0vw" eventType="touchUpInside" id="fCJ-jy-kyM"/>
                                 </connections>
@@ -262,6 +267,11 @@
                                 <state key="normal" title="BOOK">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="Book:" destination="dce-RE-0vw" eventType="touchUpInside" id="OlY-rz-OVj"/>
                                 </connections>
@@ -276,6 +286,11 @@
                                 <state key="normal" title="OFFERS">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="showMenusOffers:" destination="dce-RE-0vw" eventType="touchUpInside" id="Phh-Fd-jiD"/>
                                 </connections>
@@ -1303,7 +1318,7 @@
         <image name="user" width="133" height="135"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="5Jq-51-xNP"/>
+        <segue reference="4Y5-Ra-p20"/>
         <segue reference="CaE-ek-Ixr"/>
         <segue reference="FXm-XG-vOV"/>
         <segue reference="8ZY-8I-kjQ"/>
