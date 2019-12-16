@@ -26,8 +26,8 @@ class MainViewController: UIViewController {
             let caro2 = Restaurant()
             caro2.name = "CARO Restaurant"
             caro2.price = "$$$"
-            caro2.latitude = 55.752
-            caro2.longitude = 37.622
+            caro2.lat = 55.752
+            caro2.lng = 37.622
             caro2.pic = "caro2"
             caro2.website = "caro-r.com"
             realm.add(caro2)
@@ -35,8 +35,8 @@ class MainViewController: UIViewController {
             let caro = Restaurant()
             caro.name = "CARO Bistro&Lounge"
             caro.price = "$$"
-            caro.latitude = 55.751
-            caro.longitude = 37.623
+            caro.lat = 55.751
+            caro.lng = 37.623
             caro.pic =  "caro"
             caro.website = "caro-bl.com"
             realm.add(caro)
@@ -44,8 +44,8 @@ class MainViewController: UIViewController {
             let katlerio = Restaurant()
             katlerio.name = "Katlerio Restaurant"
             katlerio.price = "$$"
-            katlerio.latitude = 55.755
-            katlerio.longitude = 37.625
+            katlerio.lat = 55.755
+            katlerio.lng = 37.625
             katlerio.pic = "katlerio"
             katlerio.website = "katlerio.com"
             realm.add(katlerio)
@@ -53,8 +53,8 @@ class MainViewController: UIViewController {
             let cassies = Restaurant()
             cassies.name = "CASSIE'S"
             cassies.price = "$$$"
-            cassies.latitude = 55.758
-            cassies.longitude = 37.621
+            cassies.lat = 55.758
+            cassies.lng = 37.621
             cassies.pic = "cassies-kitchen"
             cassies.website = "cassies-kitchen.com"
             realm.add(cassies)
@@ -62,8 +62,8 @@ class MainViewController: UIViewController {
             let elegance = Restaurant()
             elegance.name = "Elegance Restaurant"
             elegance.price = "$$"
-            elegance.latitude = 55.78
-            elegance.longitude = 37.61
+            elegance.lat = 55.78
+            elegance.lng = 37.61
             elegance.pic = "elegance"
             elegance.website = "elegance-restaurant.com"
 
@@ -73,8 +73,8 @@ class MainViewController: UIViewController {
             let casa = Restaurant()
             casa.name = "Casa Carreno"
             casa.price = "$"
-            casa.latitude = 55.79
-            casa.longitude = 37.62
+            casa.lat = 55.79
+            casa.lng = 37.62
             casa.pic = "casa-carreno"
             casa.website = "casa-restaurant.com"
 
@@ -84,8 +84,7 @@ class MainViewController: UIViewController {
             let hailey = User()
             hailey.name = "Hailey Bieber"
             hailey.email = "hailey@bieber.com"
-            hailey.latitude = 55.751700
-            hailey.longitude = 37.618537
+            
             hailey.password = "123"
             hailey.number = "+1(999)123-12-23"
             hailey.pic = "user"

@@ -16,8 +16,7 @@ class User: Object {
     @objc dynamic var pic = ""
     @objc dynamic var password: String = ""
     @objc dynamic var number: String = ""
-    @objc dynamic var latitude = 0.0
-    @objc dynamic var longitude = 0.0
+
     let reservations = List<Reservation>()
     
     override static func primaryKey() -> String? {

@@ -12,10 +12,15 @@ import RealmSwift
 class Restaurant: Object {
     @objc dynamic var id:String = UUID().uuidString
     @objc dynamic var pic = ""
-    @objc dynamic var name = ""
+    @objc dynamic var name = "" {
+        didSet {
+            lowercaseName = name.lowercased()
+        }
+    }
+    @objc dynamic var lowercaseName = ""
     @objc dynamic var price = ""
-    @objc dynamic var latitude = 0.0
-    @objc dynamic var longitude = 0.0
+    @objc dynamic var lat = 0.0
+    @objc dynamic var lng = 0.0
     @objc dynamic var phone = "+1(999)123-12-22"
     @objc dynamic var website = ""
 
