@@ -98,10 +98,10 @@
 		AABF5A082396D6BC00E1D689 = {
 			isa = PBXGroup;
 			children = (
-				AABF5A132396D6BD00E1D689 /* Reserved */,
-				AABF5A122396D6BD00E1D689 /* Products */,
-				89FD6F47A0A115E053EFD019 /* Pods */,
 				F615BEFAC785BDF0059DC227 /* Frameworks */,
+				89FD6F47A0A115E053EFD019 /* Pods */,
+				AABF5A122396D6BD00E1D689 /* Products */,
+				AABF5A132396D6BD00E1D689 /* Reserved */,
 			);
 			sourceTree = "<group>";
 		};

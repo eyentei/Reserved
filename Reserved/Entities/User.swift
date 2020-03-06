@@ -18,7 +18,13 @@ class User: Object {
     @objc dynamic var number: String = ""
 
     let reservations = List<Reservation>()
-    
+ 
+    convenience init(name: String, email: String, password: String) {
+        self.init()
+        self.name = name
+        self.email = email
+        self.password = password
+    }
     override static func primaryKey() -> String? {
         return "id"
     }

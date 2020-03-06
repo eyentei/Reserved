@@ -79,6 +79,7 @@ class ProfileSettingsViewController: UIViewController {
                         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
 
                         self.present(alert, animated: true, completion: nil)
+                        performSegue(withIdentifier: "SignIn", sender: nil)
                     }
                 }
                    

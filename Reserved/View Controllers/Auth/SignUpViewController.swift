@@ -1,42 +1,64 @@
-//
-//  SignUpViewController.swift
-//  Reserved
-//
-//  Created by Мария Коровина on 04/12/2019.
-//  Copyright © 2019 Мария Коровина. All rights reserved.
-//
 
-import UIKit
-import RealmSwift
+    import UIKit
+    import RealmSwift
 
-class SignUpViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
     
-    @IBAction func SignUp(_ sender: Any) {
-        do {
-            let realm = try Realm()
-            // realm.write
-            performSegue(withIdentifier: "SignUp", sender: nil)
+    class SignUpViewController: UIViewController {
 
-        } catch {
-            print(error.localizedDescription)
+        @IBOutlet weak var nameTextField: UITextField!
+        @IBOutlet weak var emailTextField: UITextField!
+        @IBOutlet weak var passwordTextField: UITextField!
+        var user: User!
+       
+        override func viewDidLoad() {
+            super.viewDidLoad()
+            
         }
         
-    }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+        
+        @IBAction func SignUp(_ sender: Any) {
+            
+            guard let email = emailTextField.text, let password = passwordTextField.text,
+                let name = nameTextField.text,
+                !email.isEmpty, !password.isEmpty, !name.isEmpty else {
+                    let alertController = UIAlertController(title: "Validation Error",
+                                 message: "All fields must be filled", preferredStyle: .alert)
+                     
+                     let alertAction = UIAlertAction(title: "OK", style: .destructive) { alert in
+                         alertController.dismiss(animated: true, completion: nil)}
+                    
+                     alertController.addAction(alertAction)
+                    return present(alertController, animated: true, completion: nil)
+                    
+            }
+            
+            
+            
+            let realm = try! Realm()
+            
+            guard  realm.objects(User.self).filter("email==  %@", email).first == nil else{
+                let alertController = UIAlertController(title: "Validation Error",
+                             message: "This Email already exists", preferredStyle: .alert)
+                 
+                 let alertAction = UIAlertAction(title: "OK", style: .destructive) { alert in
+                     alertController.dismiss(animated: true, completion: nil)}
+                
+                 alertController.addAction(alertAction)
+               return  present(alertController, animated: true, completion: nil)
+                
+            }
+            
+           let newUser = User(name: name, email: email, password: password)
+          
+           try! realm.write {
+                realm.add(newUser)
+                UserDefaults.standard.set(newUser.email, forKey:"user")
+                self.performSegue(withIdentifier: "SignUp", sender: nil)
+            }
+            
 }
+}
+            
+            
+            
