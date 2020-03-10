@@ -53,7 +53,7 @@
           
            try! realm.write {
                 realm.add(newUser)
-                UserDefaults.standard.set(newUser.email, forKey:"user")
+                UserDefaults.standard.set(newUser.id, forKey:"UserId")
                 self.performSegue(withIdentifier: "SignUp", sender: nil)
             }
             

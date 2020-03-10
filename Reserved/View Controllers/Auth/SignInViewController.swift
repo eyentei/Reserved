@@ -41,7 +41,8 @@ class SignInViewController: UIViewController {
         if let user = realm.objects(User.self).filter("email==  %@", email).first {
             if user.password == password {
                 
-               
+               UserDefaults.standard.set(user.id, forKey:"UserId")
+
                self.performSegue(withIdentifier: "SignIn", sender: nil)
                 
             } else {

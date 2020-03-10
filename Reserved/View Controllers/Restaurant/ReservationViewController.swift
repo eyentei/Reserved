@@ -8,6 +8,8 @@
 
 import UIKit
 import RealmSwift
+import EventKit
+import UserNotifications
 
 protocol ModalDelegate {
     func changeValue(value: Date)
@@ -24,7 +26,6 @@ class ReservationViewController: UIViewController, ModalDelegate {
     
     @IBAction func selectTable(_ sender: UIButton) {
         realm = try! Realm()
-        
         let tables=List<Int>()
         for button in buttons {
             if button.isSelected {
@@ -32,31 +33,130 @@ class ReservationViewController: UIViewController, ModalDelegate {
             }
         }
         
-        try! realm.write() {
-            if let result = currentUser.reservations.filter("restaurant == %@ AND time == %@", currentRestaurant!, reservationDate!).first {
-                
-        
-              result.tables.removeAll()
-              result.tables.append(objectsIn: tables)
-                
+        if let result = currentUser.reservations.filter("restaurant == %@ AND time == %@", currentRestaurant!, reservationDate!).first {
+
+            if tables.count == 0 {
+                try! realm.write() {
+                    let eventStore : EKEventStore = EKEventStore()
+                    if let ev = result.calendarEventId {
+                        let event = eventStore.event(withIdentifier: ev)
+                        try? eventStore.remove(event!, span: .thisEvent, commit: true)
+                    }
+                    
+                    realm.delete(result)
+                }
             } else {
-            
-            let reservation = Reservation()
-                
-                reservation.person = currentUser
-                reservation.restaurant  = currentRestaurant
-                
-                reservation.tables = tables
-                reservation.time = reservationDate
-                
-            currentUser.reservations.append(reservation)
-                realm.add(reservation)
-            
+                try! realm.write() {
+                    result.tables.removeAll()
+                    result.tables.append(objectsIn: tables)
+                }
+                let ref = ThreadSafeReference(to: result)
+                addToCalendar(ref: ref)
             }
             
+        } else {
+            let reservation = Reservation()
+            reservation.person = currentUser
+            reservation.restaurant  = currentRestaurant
+            reservation.tables = tables
+            reservation.time = reservationDate
+            try! realm.write() {
+                currentUser.reservations.append(reservation)
+                realm.add(reservation)
+            }
+            let ref = ThreadSafeReference(to: reservation)
+            addToCalendar(ref: ref)
         }
-    
     navigationController?.popViewController(animated: true)
+    }
+    
+     func createDate(year: Int) -> Date {
+        var components = DateComponents()
+        components.year = year
+        components.timeZone = TimeZone(secondsFromGMT: 0)
+
+        return Calendar.current.date(from: components)!
+    }
+    
+    func addToCalendar(ref: ThreadSafeReference<Reservation>) {
+        
+       let eventStore : EKEventStore = EKEventStore()
+        
+       eventStore.requestAccess(to: .event) { (granted, error) in
+
+           if (granted) && (error == nil) {
+               print("granted \(granted)")
+               print("error \(error)")
+           let realm = try! Realm()
+           let result = realm.resolve(ref)
+            
+
+            if let id = result?.calendarEventId {
+                let evt = eventStore.event(withIdentifier: id)!
+                try? eventStore.remove(evt, span: .thisEvent, commit: true)
+            }
+            let event = EKEvent(eventStore: eventStore)
+
+                event.title = result!.restaurant?.name
+               event.startDate = result!.time
+               event.endDate = result!.time
+              
+               let stringArray = result!.tables.map { String($0) }
+               let tbls = stringArray.joined(separator: ", ")
+               
+               event.notes = tbls
+               event.calendar = eventStore.defaultCalendarForNewEvents
+                let alarm1hour = EKAlarm(relativeOffset: -3600) //1 hour
+                let alarm1day = EKAlarm(relativeOffset: -86400) //1 day
+                event.addAlarm(alarm1day)
+                event.addAlarm(alarm1hour)
+            
+          
+                do {
+                    
+                    try eventStore.save(event, span: .thisEvent)
+
+                    try! realm.write() {
+                        result?.calendarEventId = event.eventIdentifier
+                    }
+                   } catch let error as NSError {
+                       print("failed to save event with error : \(error)")
+                   }
+                   print("Saved Event")
+
+                self.scheduleNotification(res: result!)
+            }
+                
+      
+           else{
+
+               print("failed to save event with error : \(error) or access not granted")
+           }
+       }
+    }
+    
+    func scheduleNotification(res: Reservation) {
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let content = UNMutableNotificationContent()
+        
+        content.title = res.restaurant!.name
+        
+        let df = DateFormatter()
+        df.dateFormat = "MMMM d, H:mm"
+        let dt = df.string(from:res.time)
+        content.body = "You have a reservation for " + dt
+        content.sound = UNNotificationSound.default
+        content.badge = 1
+        
+        let identifier = "Local Notification"
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+        let notificationCenter = UNUserNotificationCenter.current()
+
+        notificationCenter.add(request) { (error) in
+            if let error = error {
+                print("Error \(error.localizedDescription)")
+            }
+        }
     }
     
     @IBAction func showDatePicker(_ sender: UIButton) {
@@ -132,11 +232,19 @@ class ReservationViewController: UIViewController, ModalDelegate {
             date.text = formatDate(value: nextDate!)
         }
 
-        let tables = List<Int>()
+        let allTables = List<Int>()
+        let userTables = List<Int>()
 
-        if let reservation = currentUser.reservations.filter("restaurant == %@ AND time == %@", currentRestaurant!, reservationDate!).first {
-            tables.append(objectsIn: reservation.tables)
+        let notUser = realm.objects(Reservation.self).filter("restaurant == %@ AND time == %@ AND NOT person == %@", currentRestaurant!, reservationDate!, currentUser!)
+        
+        if let user = realm.objects(Reservation.self).filter("restaurant == %@ AND time == %@ AND person == %@", currentRestaurant!, reservationDate!, currentUser!).first {
+            userTables.append(objectsIn: user.tables)
         }
+        
+        for usr in notUser {
+            allTables.append(objectsIn: usr.tables)
+        }
+        
     
         
         for button in buttons {
@@ -145,8 +253,11 @@ class ReservationViewController: UIViewController, ModalDelegate {
             button.setImage(UIImage.init(named: String(button.tag)+"s"), for: UIControl.State.selected)
             button.adjustsImageWhenHighlighted = false
             
-            if tables.contains(button.tag)  {
+            if userTables.contains(button.tag)  {
                 button.isSelected = true
+            }
+            if allTables.contains(button.tag)  {
+                button.isEnabled = false
             }
         }
 
