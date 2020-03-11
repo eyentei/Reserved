@@ -25,10 +25,11 @@ class ProfileSettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let realm = try! Realm()
-        var users = realm.objects(User.self)
-        Name.text=users[0].name
-        Mail.text=users[0].email
-        Phone.text=users[0].number
+        let id = UserDefaults.standard.string(forKey: "UserId")!
+        var user = realm.objects(User.self).filter("id==  %@", id).first
+        Name.text=user!.name
+        Mail.text=user!.email
+        Phone.text=user!.number
         // Do any additional setup after loading the view.
     }
     
@@ -36,7 +37,8 @@ class ProfileSettingsViewController: UIViewController {
     
     @IBAction func SaveChanges(_ sender: Any) {
         let realm = try! Realm()
-               var users = realm.objects(User.self)
+        let id = UserDefaults.standard.string(forKey: "UserId")!
+        var user = realm.objects(User.self).filter("id==  %@", id).first
 
             if Password.text==RepeatPassword.text{
                 
@@ -44,10 +46,10 @@ class ProfileSettingsViewController: UIViewController {
                 alert_1.addAction(UIAlertAction(title: "No", style: UIAlertAction.Style.cancel, handler: nil))
                 alert_1.addAction(UIAlertAction(title: "Yes", style: UIAlertAction.Style.default, handler: {action in
                 try! realm.write {
-                    users.first?.setValue(self.Name.text, forKey: "name")
-                    users.first?.setValue(self.Mail.text, forKey: "email")
-                    users.first?.setValue(self.Phone.text, forKey: "number")
-                    users.first?.setValue(self.Password.text, forKey: "password")}
+                    user!.setValue(self.Name.text, forKey: "name")
+                    user!.setValue(self.Mail.text, forKey: "email")
+                    user!.setValue(self.Phone.text, forKey: "number")
+                    user!.setValue(self.Password.text, forKey: "password")}
                     
                     
                    self.delegate?.updateLabelText(withText: self.Name.text!)

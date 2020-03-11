@@ -11,24 +11,28 @@ import RealmSwift
 
 class ReservationsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
-    
     func  listToString(tables:List<Int>)-> String
     {let formattedArray = tables.map{String($0)}.joined(separator: ", ")
         return "Table №"+formattedArray }
     
     func getReservations()-> Results<Reservation>
-    { let realm = try! Realm()
-        return realm.objects(Reservation.self)}
+    {   let realm = try! Realm()
+      let date = Date()
+        let id = UserDefaults.standard.string(forKey: "UserId")!
+      var user = realm.objects(User.self).filter("id==  %@", id).first
+        //var user = realm.objects(User.self).filter("id==  %@", id).first
+        let reserv = realm.objects(Reservation.self).filter("time > %@ AND person == %@", date, user!)
+        return reserv}
     
       func formatDate(value: Date)-> String{
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd.MM.y HH:mm"
         return dateFormatter.string(from: value)
     }
-    func registerTableViewCell()
-    {let textFieldCell=UINib(nibName: "TableViewCell", bundle: nil)
-        self.tableView.register(textFieldCell, forCellReuseIdentifier: "TableViewCell")
-    }
+    //func registerTableViewCell()
+  //  {let textFieldCell=UINib(nibName: "TableViewCell", bundle: nil)
+  //      self.tableView.register(textFieldCell, forCellReuseIdentifier: "TableViewCell")
+ //   }
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
@@ -36,7 +40,7 @@ class ReservationsViewController: UIViewController {
        // self.tableView.dataSource=self as? UITableViewDataSource
                //self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
          // self.tableView.reloadData()
-       self.tableView.dataSource = self as! UITableViewDataSource
+        self.tableView.dataSource = self
        
             }
     }
@@ -52,7 +56,7 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
     
     var reserv=self.getReservations()
     cell.RestLabel.text=reserv[indexPath.row].restaurant?.name
-    cell.DateLabel.text=formatDate(value: reserv[indexPath.row].time)
+  cell.DateLabel.text=formatDate(value: reserv[indexPath.row].time)
     cell.TableLabel.text =  listToString(tables:reserv[indexPath.row].tables)
     //2.
     //cell.textLabel?.text =  listToString(tables:reserv[indexPath.row].tables)

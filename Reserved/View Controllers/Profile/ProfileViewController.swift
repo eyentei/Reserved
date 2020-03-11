@@ -56,8 +56,9 @@ class ProfileViewController: UIViewController,UpdateLabelTextDelegate {
         profileSettings.isHidden = false
         reservations.isHidden = true
         let realm = try! Realm()
-              var users = realm.objects(User.self)
-        NameLabel.text=users[0].name
+        let id = UserDefaults.standard.string(forKey: "UserId")!
+        var user = realm.objects(User.self).filter("id==  %@", id).first
+        NameLabel.text=user!.name
       
                
     
