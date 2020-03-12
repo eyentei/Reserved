@@ -69,17 +69,24 @@ class ProfileViewController: UIViewController,UpdateLabelTextDelegate, UIImagePi
         else {
             let directoryPath =  NSHomeDirectory().appending("/Documents/")
             pic.image=UIImage(contentsOfFile: directoryPath+currentUser!.pic)
-
+            ImageViewRound()
         }
     
         // Do any additional setup after loading the view.
     }
+    func ImageViewRound()
+    { pic.layer.cornerRadius = pic.frame.size.width / 2
+               pic.clipsToBounds = true
+               pic.layer.borderWidth = 3
+               pic.layer.borderColor = UIColor.white.cgColor}
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
 
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             pic.contentMode = .scaleAspectFit
             pic.image = pickedImage
             saveImageToDocumentDirectory(pickedImage)
+            ImageViewRound()
         }
         
         dismiss(animated: true, completion: nil)
