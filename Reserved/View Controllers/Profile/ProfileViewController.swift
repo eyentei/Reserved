@@ -9,8 +9,9 @@
 import UIKit
 import RealmSwift
 
-class ProfileViewController: UIViewController,UpdateLabelTextDelegate {
-    
+class ProfileViewController: UIViewController,UpdateLabelTextDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    var currentUser:User!
+    @IBOutlet weak var pic: UIImageView!
     @IBOutlet weak var NameLabel: UILabel!
 
     func updateLabelText(withText text: String) {
@@ -27,7 +28,7 @@ class ProfileViewController: UIViewController,UpdateLabelTextDelegate {
    
     @IBOutlet weak var profileSettings: UIView!
     @IBOutlet weak var reservations: UIView!
-    
+    let imagePicker = UIImagePickerController()
     
     
     @IBAction func SwitchProfile(_ sender: AnyObject) {
@@ -55,18 +56,81 @@ class ProfileViewController: UIViewController,UpdateLabelTextDelegate {
         
         profileSettings.isHidden = false
         reservations.isHidden = true
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        pic.isUserInteractionEnabled = true
+        pic.addGestureRecognizer(tapGestureRecognizer)
         let realm = try! Realm()
         let id = UserDefaults.standard.string(forKey: "UserId")!
-        var user = realm.objects(User.self).filter("id==  %@", id).first
-        NameLabel.text=user!.name
-      
-               
+        currentUser = realm.objects(User.self).filter("id==  %@", id).first
+        NameLabel.text=currentUser!.name
+        imagePicker.delegate = self
+        if (currentUser!.pic=="user" || currentUser!.pic=="default")
+        {pic.image=UIImage(named: currentUser!.pic)}
+        else {
+            let directoryPath =  NSHomeDirectory().appending("/Documents/")
+            pic.image=UIImage(contentsOfFile: directoryPath+currentUser!.pic)
+
+        }
     
         // Do any additional setup after loading the view.
     }
-    
-    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
 
+        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            pic.contentMode = .scaleAspectFit
+            pic.image = pickedImage
+            saveImageToDocumentDirectory(pickedImage)
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+  
+
+  
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
+    {
+        let tappedImage = tapGestureRecognizer.view as! UIImageView
+       
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .photoLibrary
+            
+        present(imagePicker, animated: true, completion: nil)
+        
+    }
+    func saveImageToDocumentDirectory(_ chosenImage: UIImage)  {
+        let directoryPath =  NSHomeDirectory().appending("/Documents/")
+        
+        if !FileManager.default.fileExists(atPath: directoryPath) {
+            do {
+                try FileManager.default.createDirectory(at: NSURL.fileURL(withPath: directoryPath), withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                print(error)
+            }
+        }
+
+
+
+        let filename=currentUser.id+".jpg"
+        let filepath = directoryPath.appending(filename)
+        let url = NSURL.fileURL(withPath: filepath)
+        do {
+            try chosenImage.jpegData(compressionQuality: 1.0)?.write(to: url, options: .atomic)
+            let realm = try! Realm()
+            try! realm.write {
+     
+                currentUser!.setValue(filename, forKey: "pic")
+}
+            
+
+        } catch {
+            print(error)
+            print("file cant not be save at path \(filepath), with error : \(error)");
+            
+        }
+    }
     /*
     // MARK: - Navigation
 
@@ -76,5 +140,6 @@ class ProfileViewController: UIViewController,UpdateLabelTextDelegate {
         // Pass the selected object to the new view controller.
     }
     */
-
+    
 }
+
