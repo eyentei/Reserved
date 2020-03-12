@@ -24,6 +24,7 @@ class ProfileSettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
         let realm = try! Realm()
         let id = UserDefaults.standard.string(forKey: "UserId")!
         var user = realm.objects(User.self).filter("id==  %@", id).first
@@ -39,8 +40,9 @@ class ProfileSettingsViewController: UIViewController {
         let realm = try! Realm()
         let id = UserDefaults.standard.string(forKey: "UserId")!
         var user = realm.objects(User.self).filter("id==  %@", id).first
-
-            if Password.text==RepeatPassword.text{
+        let password=Password.text
+        if (Password.text==RepeatPassword.text && !password!.isEmpty)
+        {
                 
                  let alert_1 = UIAlertController(title: "Are you sure you want to save changes?", message: " ", preferredStyle: UIAlertController.Style.alert)
                 alert_1.addAction(UIAlertAction(title: "No", style: UIAlertAction.Style.cancel, handler: nil))
@@ -61,9 +63,7 @@ class ProfileSettingsViewController: UIViewController {
                     alert.addAction(UIAlertAction(title: "Continue", style: UIAlertAction.Style.default, handler: nil))
 
                     self.present(alert, animated: true, completion: nil)
-                    //var users = realm.objects(User.self)
-                    //ProfileController.UpdateName(text: String(users[0].name))
-                   // ProfileController.viewDidLoad()
+
                  
                   
                   
@@ -75,17 +75,45 @@ class ProfileSettingsViewController: UIViewController {
                 
               
  }
-            else{
+        else
+        { if password!.isEmpty {
+            
+             let alert_1 = UIAlertController(title: "Are you sure you want to save changes?", message: " ", preferredStyle: UIAlertController.Style.alert)
+            alert_1.addAction(UIAlertAction(title: "No", style: UIAlertAction.Style.cancel, handler: nil))
+            alert_1.addAction(UIAlertAction(title: "Yes", style: UIAlertAction.Style.default, handler: {action in
+            try! realm.write {
+                user!.setValue(self.Name.text, forKey: "name")
+                user!.setValue(self.Mail.text, forKey: "email")
+                user!.setValue(self.Phone.text, forKey: "number")}
+               self.delegate?.updateLabelText(withText: self.Name.text!)
+                self.dismiss(animated: true, completion: nil)
+
+                let alert = UIAlertController(title: "Profile settings were successfully updated!", message: "", preferredStyle: UIAlertController.Style.alert)
+
+                alert.addAction(UIAlertAction(title: "Continue", style: UIAlertAction.Style.default, handler: nil))
+
+                self.present(alert, animated: true, completion: nil)
+
+             
+              
+              
+            } ))
+
+
+            self.present(alert_1, animated: true, completion: nil)
+            
+        }
+        else{
                         let alert = UIAlertController(title: "Passwords do not match!", message: "Please, try again", preferredStyle: UIAlertController.Style.alert)
 
                         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
 
                         self.present(alert, animated: true, completion: nil)
-                        performSegue(withIdentifier: "SignIn", sender: nil)
+                        //performSegue(withIdentifier: "SignIn", sender: nil)
                     }
                 }
                    
-            
+            }
 
         
     
