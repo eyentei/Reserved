@@ -8,40 +8,43 @@
 
 import UIKit
 import RealmSwift
-
-class ReservationsViewController: UIViewController {
+protocol GetReservation {
+  func getReservation(withObject reserv: Reservation)
+}
+class ReservationsViewController: UIViewController,UITableViewDelegate {
+    var delegate: GetReservation?
     @IBOutlet weak var tableView: UITableView!
+    
+ 
+    
     func  listToString(tables:List<Int>)-> String
     {let formattedArray = tables.map{String($0)}.joined(separator: ", ")
         return "Table №"+formattedArray }
     
     func getReservations()-> Results<Reservation>
     {   let realm = try! Realm()
-      let date = Date()
+        let date = Date()
         let id = UserDefaults.standard.string(forKey: "UserId")!
-      var user = realm.objects(User.self).filter("id==  %@", id).first
-        //var user = realm.objects(User.self).filter("id==  %@", id).first
+        var user = realm.objects(User.self).filter("id==  %@", id).first
         let reserv = realm.objects(Reservation.self).filter("time > %@ AND person == %@", date, user!)
-        return reserv}
+            return reserv}
+    
+    
     
       func formatDate(value: Date)-> String{
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd.MM.y HH:mm"
-        return dateFormatter.string(from: value)
+            return dateFormatter.string(from: value)
     }
-    //func registerTableViewCell()
-  //  {let textFieldCell=UINib(nibName: "TableViewCell", bundle: nil)
-  //      self.tableView.register(textFieldCell, forCellReuseIdentifier: "TableViewCell")
- //   }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
-        //self.registerTableViewCell()
-       // self.tableView.dataSource=self as? UITableViewDataSource
-               //self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
-         // self.tableView.reloadData()
+        self.tableView.delegate=self
         self.tableView.dataSource = self
-       
+        self.tableView.allowsSelection = true
+        self.tableView.allowsSelectionDuringEditing = true
+
+     
             }
     }
 
@@ -51,7 +54,7 @@ class ReservationsViewController: UIViewController {
     }
         
 func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-     //let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)//1.
+
     let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
     
     var reserv=self.getReservations()
@@ -59,23 +62,28 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
   cell.DateLabel.text=formatDate(value: reserv[indexPath.row].time)
     cell.TableLabel.text =  listToString(tables:reserv[indexPath.row].tables)
     //2.
-    //cell.textLabel?.text =  listToString(tables:reserv[indexPath.row].tables)
-    //cell.textLabel?.text =  formatDate(value: reserv[indexPath.row].time)
-   // cell.textLabel?.text =  reserv[indexPath.row].restaurant?.name
-   // cell.detailTextLabel?.text =  reserv[indexPath.row].restaurant?.name
+
      return cell
 }
+
+func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)  {
+let reservation = getReservations()[indexPath.row]
+    print("good")
+//self.delegate?.getReservation(withObject: reservation)
+let storyboard = UIStoryboard(name: "Main", bundle: nil)
+let controller = storyboard.instantiateViewController(withIdentifier: "ReservationViewController")
+self.present(controller, animated: true, completion: nil)
+
+// Safe Present
+if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ReservationViewController") as? ReservationViewController
+{
+    present(vc, animated: true, completion: nil)
 }
     
-    //        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-     //           let realm = try! Realm()
-     //           var users = realm.objects(User.self)
-     //           var reservations=realm.objects(Reservation.self)
-     //           let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
-     //           let item = reservations[indexPath.item]
-     //           cell.textLabel?.text = item.restaurant?.name
-     //           return cell
-      //      }
+    
+}
+    
+   
         
     /*
     // MARK: - Navigation
@@ -87,3 +95,4 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
     }
     */
 
+}

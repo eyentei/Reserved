@@ -14,7 +14,7 @@ import UserNotifications
 protocol ModalDelegate {
     func changeValue(value: Date)
 }
-class ReservationViewController: UIViewController, ModalDelegate {
+class ReservationViewController: UIViewController, ModalDelegate,GetReservation {
     
     var currentUser:User!
     var realm: Realm!
@@ -69,6 +69,13 @@ class ReservationViewController: UIViewController, ModalDelegate {
         }
     navigationController?.popViewController(animated: true)
     }
+    
+    
+    func getReservation(withObject reserv: Reservation) {
+        reservationDate=reserv.time
+    }
+    
+    
     
      func createDate(year: Int) -> Date {
         var components = DateComponents()
