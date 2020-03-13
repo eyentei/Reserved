@@ -13,8 +13,9 @@ protocol GetReservation {
 }
 class ReservationsViewController: UIViewController,UITableViewDelegate {
     var delegate: GetReservation?
+    var reservationController: ReservationViewController?
     @IBOutlet weak var tableView: UITableView!
-    
+   
  
     
     func  listToString(tables:List<Int>)-> String
@@ -70,17 +71,17 @@ func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)  {
 let reservation = getReservations()[indexPath.row]
     print("good")
 //self.delegate?.getReservation(withObject: reservation)
-let storyboard = UIStoryboard(name: "Main", bundle: nil)
-let controller = storyboard.instantiateViewController(withIdentifier: "ReservationViewController")
-self.present(controller, animated: true, completion: nil)
+//let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//let controller = storyboard.instantiateViewController(withIdentifier: "ReservationViewController")
+//self.present(controller, animated: true, completion: nil)
 
 // Safe Present
-if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ReservationViewController") as? ReservationViewController
-{
-    present(vc, animated: true, completion: nil)
-}
+//if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ReservationViewController") as? ReservationViewController
+//{
+ //   present(vc, animated: true, completion: nil)
+//}
     
-    
+     performSegue(withIdentifier: "toReserv", sender: nil)
 }
     
    

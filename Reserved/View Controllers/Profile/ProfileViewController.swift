@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 
+
 class ProfileViewController: UIViewController,UpdateLabelTextDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     var currentUser:User!
     @IBOutlet weak var pic: UIImageView!
@@ -17,6 +18,7 @@ class ProfileViewController: UIViewController,UpdateLabelTextDelegate, UIImagePi
     func updateLabelText(withText text: String) {
       NameLabel.text = text
     }
+    
     
     
 
