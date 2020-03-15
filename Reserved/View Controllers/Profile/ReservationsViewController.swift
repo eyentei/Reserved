@@ -13,6 +13,7 @@ protocol GetReservation {
 }
 class ReservationsViewController: UIViewController,UITableViewDelegate {
     var delegate: GetReservation?
+    var currentReservation: Reservation?
     var reservationController: ReservationViewController?
     @IBOutlet weak var tableView: UITableView!
    
@@ -45,8 +46,11 @@ class ReservationsViewController: UIViewController,UITableViewDelegate {
         self.tableView.allowsSelection = true
         self.tableView.allowsSelectionDuringEditing = true
 
-     
             }
+    override func viewWillAppear(_ animated: Bool) {
+
+        self.tableView.reloadData()
+    }
     }
 
    extension ReservationsViewController: UITableViewDataSource {
@@ -62,13 +66,12 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
     cell.RestLabel.text=reserv[indexPath.row].restaurant?.name
   cell.DateLabel.text=formatDate(value: reserv[indexPath.row].time)
     cell.TableLabel.text =  listToString(tables:reserv[indexPath.row].tables)
-    //2.
 
      return cell
 }
 
 func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)  {
-let reservation = getReservations()[indexPath.row]
+    currentReservation = getReservations()[indexPath.row]
     print("good")
 //self.delegate?.getReservation(withObject: reservation)
 //let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -80,11 +83,19 @@ let reservation = getReservations()[indexPath.row]
 //{
  //   present(vc, animated: true, completion: nil)
 //}
+
+     
+        performSegue(withIdentifier: "toReserv", sender: nil)
+
+    }
     
-     performSegue(withIdentifier: "toReserv", sender: nil)
-}
-    
-   
+   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+       if segue.identifier == "toReserv" {
+           let res = segue.destination as! ReservationViewController
+        res.currentRestaurant = currentReservation?.restaurant
+        res.reservationDate = currentReservation?.time
+       }
+   }
         
     /*
     // MARK: - Navigation

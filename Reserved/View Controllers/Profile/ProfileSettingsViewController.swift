@@ -27,7 +27,7 @@ class ProfileSettingsViewController: UIViewController {
         print(Realm.Configuration.defaultConfiguration.fileURL!)
         let realm = try! Realm()
         let id = UserDefaults.standard.string(forKey: "UserId")!
-        var user = realm.objects(User.self).filter("id==  %@", id).first
+        let user = realm.objects(User.self).filter("id==  %@", id).first
         Name.text=user!.name
         Mail.text=user!.email
         Phone.text=user!.number
@@ -39,7 +39,7 @@ class ProfileSettingsViewController: UIViewController {
     @IBAction func SaveChanges(_ sender: Any) {
         let realm = try! Realm()
         let id = UserDefaults.standard.string(forKey: "UserId")!
-        var user = realm.objects(User.self).filter("id==  %@", id).first
+        let user = realm.objects(User.self).filter("id==  %@", id).first
         let password=Password.text
         if (Password.text==RepeatPassword.text && !password!.isEmpty)
         {

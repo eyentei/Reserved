@@ -202,10 +202,14 @@ class ReservationViewController: UIViewController, ModalDelegate,GetReservation 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        realm = try! Realm()
+        
 
+        
+        realm = try! Realm()
         let pk = UserDefaults.standard.string(forKey: "UserId")!
         currentUser = realm.object(ofType: User.self, forPrimaryKey: pk)
+        
+        if reservationDate == nil {
         
         var components = Calendar.current.dateComponents([.hour, .minute, .month, .year, .day], from: Date())
 
@@ -238,6 +242,11 @@ class ReservationViewController: UIViewController, ModalDelegate,GetReservation 
             reservationDate = nextDate
             date.text = formatDate(value: nextDate!)
         }
+        } else {
+            date.text = formatDate(value: reservationDate!)
+
+        }
+        
 
         let allTables = List<Int>()
         let userTables = List<Int>()
@@ -255,13 +264,15 @@ class ReservationViewController: UIViewController, ModalDelegate,GetReservation 
     
         
         for button in buttons {
-            button.setImage(UIImage.init(named: String(button.tag)+"w"), for: UIControl.State.normal)
             button.setImage(UIImage.init(named: String(button.tag)+"g"), for: UIControl.State.disabled)
-            button.setImage(UIImage.init(named: String(button.tag)+"s"), for: UIControl.State.selected)
+
             button.adjustsImageWhenHighlighted = false
             
             if userTables.contains(button.tag)  {
+                button.setImage(UIImage.init(named: String(button.tag)+"s"), for: UIControl.State.normal)
                 button.isSelected = true
+            } else {
+                button.setImage(UIImage.init(named: String(button.tag)+"w"), for: UIControl.State.normal)
             }
             if allTables.contains(button.tag)  {
                 button.isEnabled = false
@@ -272,23 +283,20 @@ class ReservationViewController: UIViewController, ModalDelegate,GetReservation 
     
 
     @IBAction func tableClicked(_ sender: UIButton) {
-    
-        if sender.isSelected {
-            sender.isSelected = false
-        } else {
-            sender.isSelected = true
-        }
+        
+        UIView.transition(with: sender as UIView, duration: 0.5, options: .transitionCrossDissolve, animations: {
+          // sender.isSelected.toggle()
+            
+            if sender.isSelected {
+                sender.isSelected=false
+                sender.setImage(UIImage.init(named: String(sender.tag)+"w"), for: UIControl.State.normal)
+            } else {
+                sender.isSelected=true
+                sender.setImage(UIImage.init(named: String(sender.tag)+"s"), for: UIControl.State.normal)
+
+            }
+        }, completion: nil)
         
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
