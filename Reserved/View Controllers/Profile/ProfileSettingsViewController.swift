@@ -41,77 +41,110 @@ class ProfileSettingsViewController: UIViewController {
         let id = UserDefaults.standard.string(forKey: "UserId")!
         let user = realm.objects(User.self).filter("id==  %@", id).first
         let password=Password.text
-        if (Password.text==RepeatPassword.text && !password!.isEmpty)
-        {
+        let email=Mail.text
+        if (!email!.isEmpty && email!.isEmail())
+        { if realm.objects(User.self).filter("email==  %@ AND id!= %@", email,user!.id).first == nil
+                {
+            
+            
+                    if (Password.text==RepeatPassword.text && !password!.isEmpty)
+                        {
                 
-                 let alert_1 = UIAlertController(title: "Are you sure you want to save changes?", message: " ", preferredStyle: UIAlertController.Style.alert)
-                alert_1.addAction(UIAlertAction(title: "No", style: UIAlertAction.Style.cancel, handler: nil))
-                alert_1.addAction(UIAlertAction(title: "Yes", style: UIAlertAction.Style.default, handler: {action in
-                try! realm.write {
-                    user!.setValue(self.Name.text, forKey: "name")
-                    user!.setValue(self.Mail.text, forKey: "email")
-                    user!.setValue(self.Phone.text, forKey: "number")
-                    user!.setValue(self.Password.text, forKey: "password")}
+                            let alert_1 = UIAlertController(title: "Are you sure you want to save changes?", message: " ", preferredStyle: UIAlertController.Style.alert)
+                            alert_1.addAction(UIAlertAction(title: "No", style: UIAlertAction.Style.cancel, handler: nil))
+                            alert_1.addAction(UIAlertAction(title: "Yes", style: UIAlertAction.Style.default, handler: {action in
+                                try! realm.write {
+                                    user!.setValue(self.Name.text, forKey: "name")
+                                    user!.setValue(self.Mail.text, forKey: "email")
+                                    user!.setValue(self.Phone.text, forKey: "number")
+                                    user!.setValue(self.Password.text, forKey: "password")}
                     
                     
-                   self.delegate?.updateLabelText(withText: self.Name.text!)
-                    self.dismiss(animated: true, completion: nil)
+                                self.delegate?.updateLabelText(withText: self.Name.text!)
+                                self.dismiss(animated: true, completion: nil)
                     
                     
-                    let alert = UIAlertController(title: "Profile settings were successfully updated!", message: "", preferredStyle: UIAlertController.Style.alert)
+                                let alert = UIAlertController(title: "Profile settings were successfully updated!", message: "", preferredStyle: UIAlertController.Style.alert)
 
-                    alert.addAction(UIAlertAction(title: "Continue", style: UIAlertAction.Style.default, handler: nil))
+                                alert.addAction(UIAlertAction(title: "Continue", style: UIAlertAction.Style.default, handler: nil))
 
-                    self.present(alert, animated: true, completion: nil)
+                                self.present(alert, animated: true, completion: nil)
 
                  
                   
                   
-                } ))
+                            } ))
 
 
                 self.present(alert_1, animated: true, completion: nil)
                 
                 
               
- }
-        else
-        { if password!.isEmpty {
+                    }
+                    else
+                        { if password!.isEmpty {
             
-             let alert_1 = UIAlertController(title: "Are you sure you want to save changes?", message: " ", preferredStyle: UIAlertController.Style.alert)
-            alert_1.addAction(UIAlertAction(title: "No", style: UIAlertAction.Style.cancel, handler: nil))
-            alert_1.addAction(UIAlertAction(title: "Yes", style: UIAlertAction.Style.default, handler: {action in
-            try! realm.write {
+                            let alert_1 = UIAlertController(title: "Are you sure you want to save changes?", message: " ", preferredStyle: UIAlertController.Style.alert)
+                            alert_1.addAction(UIAlertAction(title: "No", style: UIAlertAction.Style.cancel, handler: nil))
+                            alert_1.addAction(UIAlertAction(title: "Yes", style: UIAlertAction.Style.default, handler: {action in
+                                try! realm.write {
                 user!.setValue(self.Name.text, forKey: "name")
                 user!.setValue(self.Mail.text, forKey: "email")
                 user!.setValue(self.Phone.text, forKey: "number")}
-               self.delegate?.updateLabelText(withText: self.Name.text!)
-                self.dismiss(animated: true, completion: nil)
+                                self.delegate?.updateLabelText(withText: self.Name.text!)
+                                self.dismiss(animated: true, completion: nil)
 
-                let alert = UIAlertController(title: "Profile settings were successfully updated!", message: "", preferredStyle: UIAlertController.Style.alert)
+                                let alert = UIAlertController(title: "Profile settings were successfully updated!", message: "", preferredStyle: UIAlertController.Style.alert)
 
-                alert.addAction(UIAlertAction(title: "Continue", style: UIAlertAction.Style.default, handler: nil))
+                                alert.addAction(UIAlertAction(title: "Continue", style: UIAlertAction.Style.default, handler: nil))
 
-                self.present(alert, animated: true, completion: nil)
+                                self.present(alert, animated: true, completion: nil)
 
              
               
               
-            } ))
+                                } ))
 
 
-            self.present(alert_1, animated: true, completion: nil)
+                            self.present(alert_1, animated: true, completion: nil)
             
-        }
-        else{
-                        let alert = UIAlertController(title: "Passwords do not match!", message: "Please, try again", preferredStyle: UIAlertController.Style.alert)
+                            }
+                            else{
+                            let alert = UIAlertController(title: "Passwords do not match!", message: "Please, try again", preferredStyle: UIAlertController.Style.alert)
 
-                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+                            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
 
-                        self.present(alert, animated: true, completion: nil)
-                        //performSegue(withIdentifier: "SignIn", sender: nil)
+                            self.present(alert, animated: true, completion: nil)
+                     
+                            }
                     }
                 }
+                else
+            {
+                let alert = UIAlertController(title: "User with entered email already exists", message: "Please, try again", preferredStyle: UIAlertController.Style.alert)
+
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+
+                self.present(alert, animated: true, completion: nil)
+                
+                }
+                    
+                    
+                    
+                    
+            }
+                
+                
+            else
+        {
+            
+            
+            let alert = UIAlertController(title: "Email is not correct", message: "Please, try again", preferredStyle: UIAlertController.Style.alert)
+
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+
+            self.present(alert, animated: true, completion: nil)
+        }
                    
             }
 
