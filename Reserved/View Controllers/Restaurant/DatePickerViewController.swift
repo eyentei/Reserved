@@ -40,8 +40,16 @@ class DatePickerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         error.text = ""
-        datePicker.minimumDate = Date()
-        datePickerChanged()
+        
+        let calendar = Calendar.current
+        let rightNow = Date()
+        let interval = 15
+        let nextDiff = interval - calendar.component(.minute, from: rightNow) % interval
+        let nextDate = calendar.date(byAdding: .minute, value: nextDiff, to: rightNow) ?? Date()
+
+
+        datePicker.minimumDate = nextDate
+            //datePickerChanged()
         datePicker.minuteInterval = 15
         datepickerView.layer.cornerRadius = 24
         datePicker.addTarget(self, action: #selector(datePickerChanged), for: .valueChanged)
@@ -55,7 +63,6 @@ class DatePickerViewController: UIViewController {
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
         view.insertSubview(blurEffectView, at: 0)
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func ok(_ sender: Any) {

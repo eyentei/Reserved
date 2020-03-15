@@ -30,6 +30,7 @@ class ReservationViewController: UIViewController, ModalDelegate,GetReservation 
         for button in buttons {
             if button.isSelected {
                 tables.append(button.tag)
+                print(tables)
             }
         }
         
@@ -55,17 +56,21 @@ class ReservationViewController: UIViewController, ModalDelegate,GetReservation 
             }
             
         } else {
-            let reservation = Reservation()
-            reservation.person = currentUser
-            reservation.restaurant  = currentRestaurant
-            reservation.tables = tables
-            reservation.time = reservationDate
-            try! realm.write() {
-                currentUser.reservations.append(reservation)
-                realm.add(reservation)
+            if tables.count != 0 {
+                
+                let reservation = Reservation()
+                reservation.person = currentUser
+                reservation.restaurant  = currentRestaurant
+                reservation.tables = tables
+                reservation.time = reservationDate
+                try! realm.write() {
+                    currentUser.reservations.append(reservation)
+                    realm.add(reservation)
+                }
+                let ref = ThreadSafeReference(to: reservation)
+                addToCalendar(ref: ref)
             }
-            let ref = ThreadSafeReference(to: reservation)
-            addToCalendar(ref: ref)
+            
         }
     navigationController?.popViewController(animated: true)
     }
@@ -181,35 +186,53 @@ class ReservationViewController: UIViewController, ModalDelegate,GetReservation 
         return dateFormatter.string(from: value)
     }
     func changeValue(value: Date) {
+        
         reservationDate = value
         date.text = formatDate(value: value)
-        let tables = List<Int>()
-
-        if let reservation = currentUser.reservations.filter("restaurant == %@ AND time == %@", currentRestaurant!, reservationDate!).first {
-        tables.append(objectsIn: reservation.tables)
-        }
-        
-        for button in buttons {
-            
-            if tables.contains(button.tag)  {
-                button.isSelected = true
-            } else {
-                button.isSelected = false
-            }
-        }
-    
+        setTables()
     }
     
+    func setTables() {
+        let allTables = List<Int>()
+        let userTables = List<Int>()
+
+        let notUser = realm.objects(Reservation.self).filter("restaurant == %@ AND time == %@ AND NOT person == %@", currentRestaurant!, reservationDate!, currentUser!)
+            
+        if let user = realm.objects(Reservation.self).filter("restaurant == %@ AND time == %@ AND person == %@", currentRestaurant!, reservationDate!, currentUser!).first {
+                userTables.append(objectsIn: user.tables)
+        }
+            
+        for usr in notUser {
+            allTables.append(objectsIn: usr.tables)
+        }
+            
+        for button in buttons {
+            button.setImage(UIImage.init(named: String(button.tag)+"g"), for: UIControl.State.disabled)
+
+            button.adjustsImageWhenHighlighted = false
+            
+            if userTables.contains(button.tag)  {
+                button.setImage(UIImage.init(named: String(button.tag)+"s"), for: UIControl.State.normal)
+                button.isSelected = true
+            } else {
+                button.setImage(UIImage.init(named: String(button.tag)+"w"), for: UIControl.State.normal)
+                button.isSelected = false
+            }
+            if allTables.contains(button.tag)  {
+                button.isEnabled = false
+            }
+        }
+    }
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
         
         realm = try! Realm()
         let pk = UserDefaults.standard.string(forKey: "UserId")!
         currentUser = realm.object(ofType: User.self, forPrimaryKey: pk)
         
-        if reservationDate == nil {
+        if reservationDate == nil || reservationDate != nil {
         
         var components = Calendar.current.dateComponents([.hour, .minute, .month, .year, .day], from: Date())
 
@@ -233,10 +256,8 @@ class ReservationViewController: UIViewController, ModalDelegate,GetReservation 
         } else {
             let calendar = Calendar.current
             let rightNow = calendar.date(from: calendar.dateComponents([.year, .month, .day, .hour, .minute], from: Date()))
-            
             let interval = 15
             let nextDiff = interval - calendar.component(.minute, from: rightNow!) % interval
-            print(nextDiff)
             let nextDate = calendar.date(byAdding: .minute, value: nextDiff, to: rightNow!)
           
             reservationDate = nextDate
@@ -248,36 +269,7 @@ class ReservationViewController: UIViewController, ModalDelegate,GetReservation 
         }
         
 
-        let allTables = List<Int>()
-        let userTables = List<Int>()
-
-        let notUser = realm.objects(Reservation.self).filter("restaurant == %@ AND time == %@ AND NOT person == %@", currentRestaurant!, reservationDate!, currentUser!)
-        
-        if let user = realm.objects(Reservation.self).filter("restaurant == %@ AND time == %@ AND person == %@", currentRestaurant!, reservationDate!, currentUser!).first {
-            userTables.append(objectsIn: user.tables)
-        }
-        
-        for usr in notUser {
-            allTables.append(objectsIn: usr.tables)
-        }
-        
-    
-        
-        for button in buttons {
-            button.setImage(UIImage.init(named: String(button.tag)+"g"), for: UIControl.State.disabled)
-
-            button.adjustsImageWhenHighlighted = false
-            
-            if userTables.contains(button.tag)  {
-                button.setImage(UIImage.init(named: String(button.tag)+"s"), for: UIControl.State.normal)
-                button.isSelected = true
-            } else {
-                button.setImage(UIImage.init(named: String(button.tag)+"w"), for: UIControl.State.normal)
-            }
-            if allTables.contains(button.tag)  {
-                button.isEnabled = false
-            }
-        }
+       setTables()
 
     }
     
@@ -288,11 +280,12 @@ class ReservationViewController: UIViewController, ModalDelegate,GetReservation 
           // sender.isSelected.toggle()
             
             if sender.isSelected {
-                sender.isSelected=false
                 sender.setImage(UIImage.init(named: String(sender.tag)+"w"), for: UIControl.State.normal)
+                sender.isSelected=false
+
             } else {
-                sender.isSelected=true
                 sender.setImage(UIImage.init(named: String(sender.tag)+"s"), for: UIControl.State.normal)
+                sender.isSelected=true
 
             }
         }, completion: nil)
