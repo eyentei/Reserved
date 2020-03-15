@@ -70,25 +70,22 @@ class ProfileViewController: UIViewController,UpdateLabelTextDelegate, UIImagePi
         {pic.image=UIImage(named: currentUser!.pic)}
         else {
             let directoryPath =  NSHomeDirectory().appending("/Documents/")
-            pic.image=UIImage(contentsOfFile: directoryPath+currentUser!.pic)
-            ImageViewRound()
+            pic.image=UIImage(contentsOfFile: directoryPath+currentUser!.pic)?.circle
+        
         }
     
         // Do any additional setup after loading the view.
     }
-    func ImageViewRound()
-    { pic.layer.cornerRadius = pic.frame.size.width / 2
-               pic.clipsToBounds = true
-               pic.layer.borderWidth = 3
-               pic.layer.borderColor = UIColor.white.cgColor}
-    
+ 
+
+ 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
 
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             pic.contentMode = .scaleAspectFit
-            pic.image = pickedImage
+            pic.image = pickedImage.circle
             saveImageToDocumentDirectory(pickedImage)
-            ImageViewRound()
+        
         }
         
         dismiss(animated: true, completion: nil)
@@ -151,4 +148,18 @@ class ProfileViewController: UIViewController,UpdateLabelTextDelegate, UIImagePi
     */
     
 }
-
+extension UIImage {
+    var circle: UIImage {
+        let square = size.width < size.height ? CGSize(width: size.width, height: size.width) : CGSize(width: size.height, height: size.height)
+        let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: square))
+        imageView.contentMode = UIView.ContentMode.scaleAspectFill
+        imageView.image = self
+        imageView.layer.cornerRadius = square.width/2
+        imageView.layer.masksToBounds = true
+        UIGraphicsBeginImageContext(imageView.bounds.size)
+        imageView.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let result = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return result
+    }
+}

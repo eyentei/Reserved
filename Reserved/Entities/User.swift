@@ -24,6 +24,7 @@ class User: Object {
         self.name = name
         self.email = email
         self.password = password
+        self.pic="default"
     }
     override static func primaryKey() -> String? {
         return "id"
