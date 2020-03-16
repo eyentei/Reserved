@@ -18,12 +18,12 @@ class OnboardingViewController: UIViewController {
     var scrollWidth: CGFloat! = 0.0
     var scrollHeight: CGFloat! = 0.0
 
-    //data for the slides
+    
     var titles = ["CHOOSE RESTAURANT","SELECT DATE, TIME, POSITION","LOOK AT MENU","TAKE ADVANTAGE OF PROMOTIONS","ENJOY YOUR TIME!"]
     var descs = ["Choose a restaurant from a wide range of places with different cuisines. You can get to know their working hours, location and contacts.","Choose convenient time and place for you. You have the opportunity to familiarize youself with the location of tables and their reservation.","Understand in advance which dishes you prefer. Study the menu of any restaurant in great detail.","Find out what offer are in the restaurant, determine the most profitable place for your visiting","Have the opportunity to quickly choose the right place and manage your bookings with a person account."]
     var imgs = ["1","2","3","4","5"]
 
-    //get dynamic width and height of scrollview and save it
+    
     override func viewDidLayoutSubviews() {
         scrollWidth = scrollView.frame.size.width
         scrollHeight = scrollView.frame.size.height
@@ -39,7 +39,7 @@ class OnboardingViewController: UIViewController {
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
 
-        //crete the slides and add them
+       
         var frame = CGRect(x: 0, y: 0, width: 0, height: 0)
 
         for index in 0..<titles.count {
@@ -48,7 +48,7 @@ class OnboardingViewController: UIViewController {
 
             let slide = UIView(frame: frame)
 
-            //subviews
+            
             let imageView = UIImageView.init(image: UIImage.init(named: imgs[index]))
             imageView.frame = CGRect(x:0,y:0,width:300,height:300)
             imageView.contentMode = .scaleAspectFit
@@ -56,13 +56,14 @@ class OnboardingViewController: UIViewController {
           
             let txt1 = UILabel.init(frame: CGRect(x:32,y:imageView.frame.maxY+30,width:scrollWidth-64,height:30))
             txt1.textAlignment = .center
-            txt1.font = UIFont.boldSystemFont(ofSize: 20.0)
+            txt1.font = UIFont.boldSystemFont(ofSize: 17.0)
             txt1.text = titles[index]
+            txt1.textColor=UIColor.purple
 
             let txt2 = UILabel.init(frame: CGRect(x:32,y:txt1.frame.maxY+10,width:scrollWidth-64,height:50))
             txt2.textAlignment = .center
             txt2.numberOfLines = 3
-            txt2.font = UIFont.systemFont(ofSize: 18.0)
+            txt2.font = UIFont.systemFont(ofSize: 12.0)
             txt2.text = descs[index]
 
             slide.addSubview(imageView)
@@ -72,10 +73,10 @@ class OnboardingViewController: UIViewController {
 
         }
 
-        //set width of scrollview to accomodate all the slides
+        
         scrollView.contentSize = CGSize(width: scrollWidth * CGFloat(titles.count), height: scrollHeight)
 
-        //disable vertical scroll/bounce
+       
         self.scrollView.contentSize.height = 1.0
 
         //initial state

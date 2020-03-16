@@ -400,9 +400,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HIb-su-Jnq">
-                                <rect key="frame" x="38" y="601" width="33" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HIb-su-Jnq">
+                                <rect key="frame" x="36" y="604" width="33" height="30"/>
                                 <state key="normal" title="SKIP">
                                     <color key="titleColor" red="0.44750732269496057" green="0.44908028580294634" blue="0.4537991751269036" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
@@ -413,17 +412,26 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="Xpu-4u-yVY"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="7eU-L7-dNg"/>
                             </scrollView>
-                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" translatesAutoresizingMaskIntoConstraints="NO" id="j28-sm-eq0">
-                                <rect key="frame" x="147" y="598" width="81" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" translatesAutoresizingMaskIntoConstraints="NO" id="j28-sm-eq0">
+                                <rect key="frame" x="152" y="601" width="71" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="0T8-p8-F6w"/>
+                                </constraints>
                                 <color key="pageIndicatorTintColor" red="0.75754357352474622" green="0.75388394273477155" blue="0.76120320431472077" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <color key="currentPageIndicatorTintColor" red="0.52941176470588236" green="0.084046360740000006" blue="0.13235164190000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="currentPageIndicatorTintColor" red="0.57919406890000003" green="0.1280144453" blue="0.57268613580000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="pageChanged:" destination="zDH-lm-ium" eventType="valueChanged" id="0w5-MT-SLh"/>
                                 </connections>
                             </pageControl>
                         </subviews>
                         <color key="backgroundColor" red="0.91482563608218703" green="0.91040618856488187" blue="0.91924508359949231" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="HIb-su-Jnq" firstAttribute="leading" secondItem="Vvo-3S-8Wj" secondAttribute="leading" constant="36" id="VOQ-gg-pE9"/>
+                            <constraint firstItem="Vvo-3S-8Wj" firstAttribute="bottom" secondItem="j28-sm-eq0" secondAttribute="bottom" constant="29" id="Vsu-eb-MDF"/>
+                            <constraint firstItem="Vvo-3S-8Wj" firstAttribute="bottom" secondItem="HIb-su-Jnq" secondAttribute="bottom" constant="33" id="hDw-F0-FYG"/>
+                            <constraint firstItem="j28-sm-eq0" firstAttribute="centerX" secondItem="1Ty-TD-tSG" secondAttribute="centerX" id="jCU-DL-CBh"/>
+                            <constraint firstItem="Vvo-3S-8Wj" firstAttribute="trailing" secondItem="j28-sm-eq0" secondAttribute="trailing" constant="152" id="vZp-JZ-V5I"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Vvo-3S-8Wj"/>
                     </view>
                     <connections>
