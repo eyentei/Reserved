@@ -232,7 +232,7 @@ class ReservationViewController: UIViewController, ModalDelegate,GetReservation 
         let pk = UserDefaults.standard.string(forKey: "UserId")!
         currentUser = realm.object(ofType: User.self, forPrimaryKey: pk)
         
-        if reservationDate == nil || reservationDate != nil {
+        if reservationDate == nil {
         
         var components = Calendar.current.dateComponents([.hour, .minute, .month, .year, .day], from: Date())
 
