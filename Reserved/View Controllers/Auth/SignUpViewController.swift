@@ -36,7 +36,7 @@
             
             
             let realm = try! Realm()
-            
+            if email.isEmail(){
             guard  realm.objects(User.self).filter("email==  %@", email).first == nil else{
                 let alertController = UIAlertController(title: "Validation Error",
                              message: "This Email already exists", preferredStyle: .alert)
@@ -47,7 +47,12 @@
                  alertController.addAction(alertAction)
                return  present(alertController, animated: true, completion: nil)
                 
-            }
+                }}else{
+                    let alert = UIAlertController(title: "Email is not correct", message: "Please, try again", preferredStyle: UIAlertController.Style.alert)
+
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+
+                    self.present(alert, animated: true, completion: nil)}
             
            let newUser = User(name: name, email: email, password: password)
           

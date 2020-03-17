@@ -8,11 +8,12 @@
 
 import UIKit
 
-class OnboardingViewController: UIViewController {
+class OnboardingViewController: UIViewController , UIScrollViewDelegate{
     
+    @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet var scrollView: UIScrollView!
     
-    @IBOutlet var pageControl: UIPageControl!
+   
     
     
     var scrollWidth: CGFloat! = 0.0
@@ -34,7 +35,7 @@ class OnboardingViewController: UIViewController {
         self.view.layoutIfNeeded()
         //to call viewDidLayoutSubviews() and get dynamic width and height of scrollview
 
-        self.scrollView.delegate = self as! UIScrollViewDelegate
+       self.scrollView.delegate = self as? UIScrollViewDelegate
         scrollView.isPagingEnabled = true
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false

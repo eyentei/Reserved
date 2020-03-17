@@ -38,6 +38,9 @@ class SignInViewController: UIViewController {
         }
        
          let realm = try! Realm()
+        
+        
+        if email.isEmail(){
         if let user = realm.objects(User.self).filter("email==  %@", email).first {
             if user.password == password {
                 
@@ -66,7 +69,17 @@ class SignInViewController: UIViewController {
                             
                              alertController.addAction(alertAction)
             return  present(alertController, animated: true, completion: nil)
+            }}
+        else {
+            let alert = UIAlertController(title: "Email is not correct", message: "Please, try again", preferredStyle: UIAlertController.Style.alert)
+
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+
+            self.present(alert, animated: true, completion: nil)
         }
+        
+        
+    }
                 
     }
     
@@ -80,4 +93,4 @@ class SignInViewController: UIViewController {
     }
     */
 
-}
+
