@@ -33,7 +33,16 @@ class ProfileSettingsViewController: UIViewController {
         Phone.text=user!.number
         // Do any additional setup after loading the view.
     }
-    
+    func alert(Title: String, Text: String)
+    {
+        
+        let alert = UIAlertController(title: Title, message: Text, preferredStyle: UIAlertController.Style.alert)
+
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+
+        self.present(alert, animated: true, completion: nil)
+        
+    }
     
     
     @IBAction func SaveChanges(_ sender: Any) {
@@ -42,12 +51,13 @@ class ProfileSettingsViewController: UIViewController {
         let user = realm.objects(User.self).filter("id==  %@", id).first
         let password=Password.text
         let email=Mail.text
+        let phone=Phone.text
         if (!email!.isEmpty && email!.isEmail())
         { if realm.objects(User.self).filter("email==  %@ AND id!= %@", email,user!.id).first == nil
                 {
             
-            
-                    if (Password.text==RepeatPassword.text && !password!.isEmpty)
+                    if phone!.isPhone()
+                    {  if (Password.text==RepeatPassword.text && !password!.isEmpty)
                         {
                 
                             let alert_1 = UIAlertController(title: "Are you sure you want to save changes?", message: " ", preferredStyle: UIAlertController.Style.alert)
@@ -110,22 +120,23 @@ class ProfileSettingsViewController: UIViewController {
             
                             }
                             else{
-                            let alert = UIAlertController(title: "Passwords do not match!", message: "Please, try again", preferredStyle: UIAlertController.Style.alert)
-
-                            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-
-                            self.present(alert, animated: true, completion: nil)
+                            
+                            alert(Title:"Passwords do not match!", Text: "Please, try again")
+                            
                      
                             }
                     }
+                    }
+                    else
+                    {alert(Title:"Invalid phone number!", Text: "Please, try again")}
                 }
+        
+            
                 else
             {
-                let alert = UIAlertController(title: "User with entered email already exists", message: "Please, try again", preferredStyle: UIAlertController.Style.alert)
+                
+                alert(Title:"Validation error!", Text: "User with entered email already exists")
 
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-
-                self.present(alert, animated: true, completion: nil)
                 
                 }
                     
@@ -138,12 +149,8 @@ class ProfileSettingsViewController: UIViewController {
             else
         {
             
-            
-            let alert = UIAlertController(title: "Email is not correct", message: "Please, try again", preferredStyle: UIAlertController.Style.alert)
-
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-
-            self.present(alert, animated: true, completion: nil)
+            alert(Title:"Email is not correct", Text: "Please, try again")
+ 
         }
                    
             }

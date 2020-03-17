@@ -1387,7 +1387,7 @@
                                             <action selector="SaveChanges:" destination="w9l-i0-ydU" eventType="touchUpInside" id="TyJ-gw-iB5"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BI6-gP-bv3">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone number like 8-9XX-XX-XX" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BI6-gP-bv3">
                                         <rect key="frame" x="35" y="247" width="305" height="38"/>
                                         <color key="backgroundColor" red="0.83914166690000003" green="0.83926302190000002" blue="0.83911520240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <accessibility key="accessibilityConfiguration" label="Phone"/>
