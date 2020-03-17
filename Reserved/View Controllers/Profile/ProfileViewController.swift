@@ -24,7 +24,7 @@ class ProfileViewController: UIViewController,UpdateLabelTextDelegate, UIImagePi
 
     
     @IBAction func LogOut(_ sender: Any) {
-        self.navigationController?.popToRootViewController(animated: true)
+        self.performSegue(withIdentifier: "LogOut", sender: nil)
 
     }
    
