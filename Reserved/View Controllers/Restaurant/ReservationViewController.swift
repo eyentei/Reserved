@@ -220,6 +220,8 @@ class ReservationViewController: UIViewController, ModalDelegate,GetReservation 
             }
             if allTables.contains(button.tag)  {
                 button.isEnabled = false
+            } else {
+                button.isEnabled = true
             }
         }
     }
