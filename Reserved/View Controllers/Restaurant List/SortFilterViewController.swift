@@ -13,17 +13,27 @@ class SortFilterViewController: UITableViewController {
     
     var realm: Realm!
     var sortBy: String = "Name"
+    var search: String?
     var sortable = [2:"Name",3:"Price",4:"Distance"]
-    var delegate:SortDelegate?
+    var sortDelegate:SortDelegate?
+    var searchDelegate:SearchDelegate?
+    
+    @IBOutlet weak var searchBar: UITextField!
     
     
     @IBAction func applySort(_ sender: Any) {
-        if let delegate = self.delegate {
+        if let sort = self.sortDelegate {
             if let cell =  self.tableView.indexPathForSelectedRow?.row {
             
                 sortBy = sortable[cell]!
-                delegate.sortRestaurants(by: sortable[cell]!)
-            
+                sort.sortRestaurants(by: sortable[cell]!)
+                
+            }
+        }
+        if let srch = self.searchDelegate {
+            search = searchBar.text
+            if let s = search {
+                srch.searchRestaurants(by: s)
             }
         }
         navigationController?.popViewController(animated: true)
@@ -36,7 +46,7 @@ class SortFilterViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
 
-            
+        searchBar.text = search
             let ind = (sortable as NSDictionary).allKeys(for: sortBy) as! [Int]
             let indexPath = IndexPath(row: ind[0], section: 0)
             self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: UITableView.ScrollPosition.middle)

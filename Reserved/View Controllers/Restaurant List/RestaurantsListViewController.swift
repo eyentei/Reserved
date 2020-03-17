@@ -12,13 +12,19 @@ protocol SortDelegate
 {
     func sortRestaurants(by: String)
 }
+protocol SearchDelegate
+{
+    func searchRestaurants(by: String)
+}
 
-class RestaurantsListViewController: UIViewController,SortDelegate {
+class RestaurantsListViewController: UIViewController,SortDelegate,SearchDelegate {
     
     var listColl: ListCollectionViewController?
     var sortFilt: SortFilterViewController?
     
     var sortBy: String = "Name"
+    var search: String?
+    
     @IBOutlet weak var listContainer: UIView!
     @IBOutlet weak var mapContainer: UIView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
@@ -48,6 +54,11 @@ class RestaurantsListViewController: UIViewController,SortDelegate {
         
     }
 
+    func searchRestaurants(by:String) {
+        search = by
+        listColl?.search = by
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -67,7 +78,9 @@ class RestaurantsListViewController: UIViewController,SortDelegate {
         if segue.identifier  == "toSortFilter" {
             let destination = segue.destination as! SortFilterViewController
             destination.sortBy = sortBy
-            destination.delegate = self
+            destination.search = search
+            destination.sortDelegate = self
+            destination.searchDelegate = self
         } else if segue.identifier == "toList" {
             listColl = segue.destination as? ListCollectionViewController
            

@@ -18,6 +18,7 @@ private let reuseIdentifier = "RestaurantCell"
 class ListCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate {
     
     var sortBy: String = "Name"
+    var search: String?
     var restaurants: Array<Restaurant>!
     var restaurant: Restaurant!
     var realm: Realm!
@@ -59,7 +60,18 @@ class ListCollectionViewController: UICollectionViewController, UICollectionView
         default:
             break
         }
-        
+        if let s = search {
+            if !s.isEmpty{
+
+                restaurants = restaurants.filter{
+                    
+                    guard let name = $0["lowercaseName"] as? String else { return false }
+                
+                    return name.contains(s.lowercased())
+
+                }
+            }
+        }
 
         self.collectionView.reloadData()
 

@@ -1280,6 +1280,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="searchBar" destination="IEJ-WL-3vW" id="MwC-Uq-sxL"/>
                         <segue destination="vz2-lt-W0J" kind="show" identifier="toFilter" id="6ct-ja-jhX"/>
                     </connections>
                 </tableViewController>
